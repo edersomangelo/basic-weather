@@ -1,38 +1,36 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\WeatherForm */
 
 use yii\widgets\Pjax;
-use yii\bootstrap\ActiveForm;
-$this->title = 'My Yii Application';
+use yii\web\View;
+$this->title = 'Test - Weather';
 ?>
 <div class="site-index">
-    <h1 class="title">Teste</h1>
-    <p class="txt">Preencha o campo abaixo para listar uma cidade</p>
     <?php Pjax::begin(); ?>
-    <div class="box-form">
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'options' => [
-                'data-pjax' => '',
-            ],
-            'layout' => 'horizontal',
-            'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                'labelOptions' => ['class' => 'col-lg-1 control-label'],
-            ],
-        ]);
-        ?>
-        <div class="form-group">
-            <?= $form->field($model, 'city_id') ?>
+    <div class="hero" data-bg-image="images/banner.png">
+        <div class="container">
+            <?= $this->render('_form_weather',['model'=>$model]);?>
         </div>
     </div>
-    <?php ActiveForm ::end(); ?>
-    <div>
-        <?php print_r($model->getCurrentWeather());?>
-        <?php Pjax::end(); ?>
+    <div class="forecast-table">
+        <?= $this->render('_temp_partial',[
+            'currentWeatherData' => $model->getCurrentWeather(),
+            'forecastWeatherData' => $model->getForecastWeather(5),
+        ]);?>
     </div>
+    <?php Pjax::end(); ?>
 </div>
+
+<?php
+$js = <<<JS
+$(document).on('pjax:send', function() {
+    $('#loading').show();
+});
+$(document).on('pjax:complete', function() {
+    $('#loading').hide();
+});
+JS;
+$this->registerJs($js,View::POS_READY,'pjax-loading');
+?>

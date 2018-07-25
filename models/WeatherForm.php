@@ -22,9 +22,20 @@ class WeatherForm extends Model
     }
     public function getCurrentWeather()
     {
-        if (!empty($this->city_id)) {
-            return Yii::$app->weatherApi->weatherByCityId($this->city_id);
+        $this->setDefaultCity();
+        return Yii::$app->weatherApi->weatherByCityId($this->city_id);
+    }
+
+    public function getForecastWeather(int $limit)
+    {
+        $this->setDefaultCity();
+        return Yii::$app->weatherApi->forecastByCityId($this->city_id, $limit);
+    }
+
+    private function setDefaultCity()
+    {
+        if (empty($this->city_id)) {
+            $this->city_id = Yii::$app->params['default-weather-city'];
         }
-        return false;
     }
 }
