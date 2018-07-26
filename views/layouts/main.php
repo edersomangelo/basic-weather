@@ -24,12 +24,6 @@ AppAsset::register($this);
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
     <link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
-    <!--[if lt IE 9]>
-    <script src="js/ie-support/html5.js"></script>
-    <script src="js/ie-support/respond.js"></script>
-    <![endif]-->
-
 </head>
 
 
@@ -39,10 +33,6 @@ AppAsset::register($this);
     <?= Alert::widget() ?>
     <?= $content ?>
 </div>
-
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/app.js"></script>
 <?php $this->endBody() ?>
 </body>
 

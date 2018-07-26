@@ -25,7 +25,7 @@ class Init extends Component
     {
         $params = [
             'name_like' => $cityName,
-            '_limit'=>10
+            '_limit'=>5
         ];
 
         $response = $this->_client->get("{$this->apiUriBase}/city",
