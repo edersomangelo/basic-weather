@@ -28,7 +28,13 @@ class SiteController extends Controller
     public function actionSearchCity($term) {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
-            return Yii::$app->weatherApi->searchCity($term)
+            $data = Yii::$app->jsonServerApi->cityByName($term);
+            return array_map(function($row){
+                return [
+                    'label' =>$row->name,
+                    'value' => $row->id
+                ];
+            },$data);
         }
     }
 
