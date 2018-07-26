@@ -11,6 +11,7 @@ class Init extends Component
     public $appId;
 
     private $_client;
+    private $_defaultParams;
 
     /**
      * Init constructor.
@@ -19,6 +20,10 @@ class Init extends Component
     public function __construct(array $config = [])
     {
         $this->_client = new Client();
+        $this->_defaultParams = [
+            'units'=>'metric',
+            'appid' => $config['appId']
+        ];
         parent::__construct($config);
     }
 
@@ -28,20 +33,34 @@ class Init extends Component
      */
     public function weatherByCityId(int $cityId)
     {
-        $params = [
-            'id' => $cityId,
-            'appid' => $this->appId
-        ];
+        $params = array_merge($this->_defaultParams,[
+            'id' => $cityId
+        ]);
 
         $response = $this->_client->get("{$this->apiUriBase}/weather" ,
             ['query' => $params]
         );
 
-        $return = $response->getBody()->getContents();
-        if (!empty($return)) {
-            return $return;
-        }
+        return  $this->formatResult($response->getBody()->getContents());
+    }
 
+    public function forecastByCityId(int $cityId)
+    {
+        $params = array_merge($this->_defaultParams,[
+            'id' => $cityId
+        ]);
+
+        $response = $this->_client->get("{$this->apiUriBase}/forecast" ,
+            ['query' => $params]
+        );
+
+        return  $this->formatResult($response->getBody()->getContents());
+    }
+
+    private function formatResult($data) {
+        if (!empty($data)) {
+            return json_decode($data);
+        }
         return null;
     }
 }

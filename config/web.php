@@ -30,19 +30,21 @@ $config = [
                 ],
             ],
         ],
+        jsonServerApi => [
+            'class' => 'app\components\JsonServerService\Init',
+            'apiUriBase'=>'http://jsonserver'
+        ],
         'weatherApi' => [
             'apiUriBase' => getenv('WEATHER_API_BASE_URL')."/data/2.5",
             'appId' => getenv('WEATHER_API_KEY'),
             'class' => 'app\components\WeatherService\Init',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

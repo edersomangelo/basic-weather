@@ -13,3 +13,9 @@ services:
     working_dir: /www/
     ports:
       - "81:80"
+    depends_on:
+    - jsonserver
+  jsonserver:
+    image: clue/json-server
+    volumes:
+        - ./data/city.list.json:/data/db.json
