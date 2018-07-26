@@ -4,6 +4,7 @@
 
 
 use yii\bootstrap\ActiveForm;
+use yii\jui\AutoComplete;
 ?>
 <div class="box-form">
     <?php $form = ActiveForm::begin([
@@ -19,7 +20,17 @@ use yii\bootstrap\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'city_id')->textInput(["placeholder"=>"Find your location..."]) ?>
+    <?php
+        echo AutoComplete::widget ([
+        'model' => $model,
+        'attribute' => 'city_id',
+        'clientOptions' => [
+            'source' => \yii\helpers\Url::to(['site/search-city'])
+        ],
+    ]);
+    ?>
+
+    <? //= $form->field($model, 'city_id')->textInput(["placeholder"=>"Find your location..."]) ?>
     <input type="submit" value="Find">
 
     <?php ActiveForm ::end(); ?>

@@ -17,7 +17,7 @@ $this->title = 'Test - Weather';
     <div class="forecast-table">
         <?= $this->render('_temp_partial',[
             'currentWeatherData' => $model->getCurrentWeather(),
-            'forecastWeatherData' => $model->getForecastWeather(5),
+            'forecastWeatherData' => $model->getForecastWeather(),
         ]);?>
     </div>
     <?php Pjax::end(); ?>

@@ -26,10 +26,10 @@ class WeatherForm extends Model
         return Yii::$app->weatherApi->weatherByCityId($this->city_id);
     }
 
-    public function getForecastWeather(int $limit)
+    public function getForecastWeather()
     {
         $this->setDefaultCity();
-        return Yii::$app->weatherApi->forecastByCityId($this->city_id, $limit);
+        return Yii::$app->weatherApi->forecastByCityId($this->city_id);
     }
 
     private function setDefaultCity()

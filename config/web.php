@@ -35,14 +35,12 @@ $config = [
             'appId' => getenv('WEATHER_API_KEY'),
             'class' => 'app\components\WeatherService\Init',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

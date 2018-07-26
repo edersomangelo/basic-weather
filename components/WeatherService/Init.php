@@ -4,6 +4,7 @@ namespace app\components\WeatherService;
 
 use GuzzleHttp\Client;
 use yii\base\Component;
+use yii\data\ArrayDataProvider;
 
 class Init extends Component
 {
@@ -56,6 +57,16 @@ class Init extends Component
 
         return  $this->formatResult($response->getBody()->getContents());
     }
+
+    public function searchCity($term){
+        $provider = new ArrayDataProvider([
+            'key'=>'id',
+            'allModels' => [
+                
+            ],
+        ]);
+    }
+
     private function formatResult($data) {
         if (!empty($data)) {
             return json_decode($data);
