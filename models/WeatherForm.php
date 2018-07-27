@@ -35,7 +35,8 @@ class WeatherForm extends Model
         }
 
         return array_filter($data->list,function($value){
-            if(date('H:i:s',$value->dt) == '12:00:00'){
+            if(date('H:i:s',$value->dt) == '12:00:00'
+                && date('Y-m-d',$value->dt) != date('Y-m-d')){
                 return $value;
             }
         },ARRAY_FILTER_USE_BOTH);

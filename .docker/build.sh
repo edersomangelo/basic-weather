@@ -8,9 +8,6 @@ then
   exit 1
 fi
 
-echo !! composer install --no-dev
-composer install --no-dev
-
 if [ "$APPLICATION_ENV" != "Production" ]
 then
   # Install test env dependencies
